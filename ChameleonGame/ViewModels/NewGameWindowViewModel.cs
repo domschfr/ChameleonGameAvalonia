@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChameleonGame.ViewModels
+{
+    public class NewGameWindowViewModel : ViewModelBase
+    {
+        private int? _selectedSize = null;
+        private bool _dialogResult = false;
+
+        public int? SelectedSize
+        {
+            get => _selectedSize;
+            set
+            {
+                if (_selectedSize != value)
+                {
+                    _selectedSize = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsEasy));
+                    OnPropertyChanged(nameof(IsMedium));
+                    OnPropertyChanged(nameof(IsHard));
+                    ConfirmCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public bool DialogResult
+        {
+            get => _dialogResult;
+            set
+            {
+                if (_dialogResult != value)
+                {
+                    _dialogResult = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsEasy
+        {
+            get => SelectedSize == 3;
+            set { if (value) SelectedSize = 3; }
+        }
+
+        public bool IsMedium
+        {
+            get => SelectedSize == 5;
+            set { if (value) SelectedSize = 5; }
+        }
+
+        public bool IsHard
+        {
+            get => SelectedSize == 7;
+            set { if (value) SelectedSize = 7; }
+        }
+
+        public DelegateCommand ConfirmCommand { get; }
+        public DelegateCommand CancelCommand { get; }
+
+        public NewGameWindowViewModel()
+        {
+            ConfirmCommand = new DelegateCommand(_ =>
+            {
+                DialogResult = true;
+            }, _ => SelectedSize == 3 || SelectedSize == 5 || SelectedSize == 7);
+            CancelCommand = new DelegateCommand(_ =>
+            {
+                DialogResult = true;
+            });
+        }
+    }
+}

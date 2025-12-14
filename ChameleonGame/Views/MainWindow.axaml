@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ChameleonGame.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:ChameleonGame.Views"
+        mc:Ignorable="d" d:DesignWidth="627" d:DesignHeight="737"
+        x:Class="ChameleonGame.Views.MainWindow"
+        Icon="/Assets/chameleon_logo.ico"
+        Title="Chameleon Game">
+        <views:MainView />
+
+</Window>

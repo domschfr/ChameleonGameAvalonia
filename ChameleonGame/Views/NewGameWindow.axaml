@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChameleonGame.Views"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+        x:Class="ChameleonGame.NewGameWindow"
+        Title="New Game" Width="400" Height="300"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        Icon="../Assets/chameleon_logo.ico"
+        local:WindowAttachedProperties.DialogResult="{Binding DialogResult}">
+  
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Start a New Game" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        <TextBlock Grid.Row="1" Text="Choose a Difficulty!" FontSize="12" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton x:Name="EasyButton" Content="Easy - 3 x 3" GroupName="Difficulty" Margin="5" IsChecked="{Binding IsEasy}"/>
+            <RadioButton x:Name="MediumButton" Content="Medium - 5 x 5" GroupName="Difficulty" Margin="5" IsChecked="{Binding IsMedium}"/>
+            <RadioButton x:Name="HardButton" Content="Hard - 7 x 7" GroupName="Difficulty" Margin="5" IsChecked="{Binding IsHard}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button x:Name="CancelButton" Content="Cancel" Width="100" Margin="10" IsCancel="True" Command="{Binding CancelCommand}"/>
+            <Button x:Name="StartButton" Content="Start Game" Width="100" Margin="10" IsDefault="True" Command="{Binding ConfirmCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

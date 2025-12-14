@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ChameleonGame.ViewModels"
+             xmlns:views="clr-namespace:ChameleonGame.Views"
+             mc:Ignorable="d" d:DesignWidth="627" d:DesignHeight="737"
+             x:Class="ChameleonGame.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+
+  </Design.DataContext>
+
+    <UserControl.Resources>
+        <views:ImageSourceConverter x:Key="ImageSourceConverter"/>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+		<Style x:Key="CellButtonStyle" Selector="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Source="{Binding CellImageFilename, Converter={StaticResource ImageSourceConverter}}" Stretch="Fill"  Width="90" Height="90"/>
+                            <Image Source="{Binding PieceImageFilename, Converter={StaticResource ImageSourceConverter}}" Stretch="Fill" Width="80" Height="80"/>
+
+                            <Border x:Name="SelectionBorder" BorderBrush="Gold" BorderThickness="4" IsVisible="False"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.CellButtonStyle.Selected /template/ Border#SelectionBorder">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="New Game" Command="{Binding NewGameCommand}"/>
+                <MenuItem Header="Save Game" Command="{Binding SaveGameCommand}"/>
+                <MenuItem Header="Load Game" Command="{Binding LoadGameCommand}"/>
+            </Menu>
+
+            <Image DockPanel.Dock="Top" Source="../Assets/chameleon_banner.png" Height="50" Stretch="Uniform" HorizontalAlignment="Center"/>
+            
+            <TextBlock DockPanel.Dock="Top" Text="{Binding CurrentPlayer}" FontWeight="Bold" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center"/>
+                
+            <Viewbox Margin="10">
+                <ItemsControl ItemsSource="{Binding BoardCells}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="{Binding BoardSize}" Columns="{Binding BoardSize}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Width="90" Height="90" Classes="CellButtonStyle" Classes.Selected="{Binding IsSelected}" Command="{Binding CellClickCommand}" CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Viewbox>
+        </DockPanel>
+    </Grid>
+
+
+
+</UserControl>
