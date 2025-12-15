@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
+VisualStudioVersion = 17.14.36705.20
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonGame", "ChameleonGame\ChameleonGame.csproj", "{C5C0F4AB-9560-6DE3-3CAB-11F0E5C391E4}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonGame.Model", "ChameleonGame.Model\ChameleonGame.Model.csproj", "{4EE57894-9167-2D3A-6FB0-1BEBA5A82EDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonGame.Persistance", "ChameleonGame.Persistance\ChameleonGame.Persistance.csproj", "{20E54EC6-FDF9-D22E-6D40-2F6A5C8D4689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonGame.Test", "ChameleonGameTest\ChameleonGame.Test.csproj", "{BC32EB0B-89B4-4DD1-7261-B8BDF5915C7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{20E54EC6-FDF9-D22E-6D40-2F6A5C8D4689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E54EC6-FDF9-D22E-6D40-2F6A5C8D4689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E54EC6-FDF9-D22E-6D40-2F6A5C8D4689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC32EB0B-89B4-4DD1-7261-B8BDF5915C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC32EB0B-89B4-4DD1-7261-B8BDF5915C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC32EB0B-89B4-4DD1-7261-B8BDF5915C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC32EB0B-89B4-4DD1-7261-B8BDF5915C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
