@@ -6,12 +6,15 @@ namespace ChameleonGame.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
+    
+    
     #region private fields
 
     private readonly GameModel _model;
     private bool _isGameOver = false;
     private string _currentPlayer = "";
     private int _boardSize;
+    private NewGameWindowViewModel? _currentOverlay;
 
     #endregion
 
@@ -33,6 +36,21 @@ public class MainViewModel : ViewModelBase
         private set
         {
             _boardSize = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsNewGameOpen
+    {
+        get => CurrentOverlay != null;
+    }
+
+    public NewGameWindowViewModel? CurrentOverlay
+    {
+        get => _currentOverlay;
+        set
+        {
+            _currentOverlay = value;
             OnPropertyChanged();
         }
     }
@@ -69,16 +87,23 @@ public class MainViewModel : ViewModelBase
         _model.ErrorOccurred += OnErrorOccurred;
 
         NewGameCommand = new DelegateCommand(param => {
-            if (param is int size)
-            {
-                NewGameRequested(size);
-            }
-            else
-            {
-                NewGame?.Invoke(this, EventArgs.Empty);
-            }
+            NewGameWindowViewModel vm = new NewGameWindowViewModel();
 
+            vm.RequestStartGame += (s, e) =>
+            {
+                NewGameRequested((int)e!);
+                CurrentOverlay = null;
+                OnPropertyChanged(nameof(IsNewGameOpen));
+            };
 
+            vm.RequestCancel += (s, e) =>
+            {
+                CurrentOverlay = null;
+                OnPropertyChanged(nameof(IsNewGameOpen));
+            };
+
+            CurrentOverlay = vm;
+            OnPropertyChanged(nameof(IsNewGameOpen));
         });
         SaveGameCommand = new DelegateCommand(param => {
 
@@ -138,7 +163,7 @@ public class MainViewModel : ViewModelBase
     {
         try
         {
-            BoardSize = size;
+            BoardSize = size!;
             GenerateBoard();
             _model.NewGame(size);
             _isGameOver = false;

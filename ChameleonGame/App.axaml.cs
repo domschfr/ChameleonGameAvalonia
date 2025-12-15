@@ -59,16 +59,16 @@ public partial class App : Application
 
     private async void ViewModel_NewGame(object? sender, EventArgs e)
     {
+        NewGameWindowViewModel vm = new NewGameWindowViewModel();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var window = new NewGameWindow();
+            var window = new NewGameView();
             var viewModel = new NewGameWindowViewModel();
             window.DataContext = viewModel;
 
-            var result = await window.ShowDialog<bool?>(desktop.MainWindow!);
+            await window.ShowDialog(desktop.MainWindow!);
 
-            // Vagy ha a ViewModel-ben kezeled a bezárást:
-            // Ellenőrizni kell, hogy a DialogResult bindolva volt-e
             if (viewModel.DialogResult && viewModel.SelectedSize != null)
             {
                 _mainViewModel.NewGameCommand.Execute(viewModel.SelectedSize);

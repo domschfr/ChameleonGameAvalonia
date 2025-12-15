@@ -28,19 +28,6 @@ namespace ChameleonGame.ViewModels
             }
         }
 
-        public bool DialogResult
-        {
-            get => _dialogResult;
-            set
-            {
-                if (_dialogResult != value)
-                {
-                    _dialogResult = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public bool IsEasy
         {
             get => SelectedSize == 3;
@@ -59,19 +46,16 @@ namespace ChameleonGame.ViewModels
             set { if (value) SelectedSize = 7; }
         }
 
+        public event EventHandler<int?>? RequestStartGame;
+        public event EventHandler? RequestCancel;
+
         public DelegateCommand ConfirmCommand { get; }
         public DelegateCommand CancelCommand { get; }
 
         public NewGameWindowViewModel()
         {
-            ConfirmCommand = new DelegateCommand(_ =>
-            {
-                DialogResult = true;
-            }, _ => SelectedSize == 3 || SelectedSize == 5 || SelectedSize == 7);
-            CancelCommand = new DelegateCommand(_ =>
-            {
-                DialogResult = true;
-            });
+            ConfirmCommand = new DelegateCommand(_ => RequestStartGame?.Invoke(this, SelectedSize!), _ => SelectedSize == 3 || SelectedSize == 5 || SelectedSize == 7);
+            CancelCommand = new DelegateCommand(_ => RequestCancel?.Invoke(this, EventArgs.Empty));
         }
     }
 }

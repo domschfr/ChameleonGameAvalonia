@@ -1,15 +1,11 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ChameleonGame.Views"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
-        x:Class="ChameleonGame.NewGameWindow"
-        Title="New Game" Width="400" Height="300"
-        WindowStartupLocation="CenterScreen"
-        CanResize="False"
-        Icon="../Assets/chameleon_logo.ico"
-        local:WindowAttachedProperties.DialogResult="{Binding DialogResult}">
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:ChameleonGame.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+             x:Class="ChameleonGame.Views.NewGameView"
+             x:DataType="viewmodels:NewGameWindowViewModel">
   
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -33,4 +29,4 @@
             <Button x:Name="StartButton" Content="Start Game" Width="100" Margin="10" IsDefault="True" Command="{Binding ConfirmCommand}"/>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>

@@ -19,13 +19,13 @@
     </UserControl.Resources>
 
     <UserControl.Styles>
-		<Style x:Key="CellButtonStyle" Selector="Button">
+		<Style Selector="Button.CellButtonStyle">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate>
+                    <ControlTemplate x:DataType="vm:BoardCellViewModel">
                         <Grid>
                             <Image Source="{Binding CellImageFilename, Converter={StaticResource ImageSourceConverter}}" Stretch="Fill"  Width="90" Height="90"/>
                             <Image Source="{Binding PieceImageFilename, Converter={StaticResource ImageSourceConverter}}" Stretch="Fill" Width="80" Height="80"/>
@@ -53,7 +53,7 @@
             <Image DockPanel.Dock="Top" Source="../Assets/chameleon_banner.png" Height="50" Stretch="Uniform" HorizontalAlignment="Center"/>
             
             <TextBlock DockPanel.Dock="Top" Text="{Binding CurrentPlayer}" FontWeight="Bold" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center"/>
-                
+
             <Viewbox Margin="10">
                 <ItemsControl ItemsSource="{Binding BoardCells}">
                     <ItemsControl.ItemsPanel>
@@ -69,6 +69,15 @@
                 </ItemsControl>
             </Viewbox>
         </DockPanel>
+
+        <Grid IsVisible="{Binding IsNewGameOpen}">
+            <Border Background="#AA000000"/>
+
+            <views:NewGameView DataContext="{Binding CurrentOverlay}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       Width="400" Height="300"/>
+        </Grid>
     </Grid>
 
 
