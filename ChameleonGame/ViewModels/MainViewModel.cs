@@ -68,7 +68,7 @@ public class MainViewModel : ViewModelBase
 
     #region Events
 
-    public event EventHandler? NewGame;
+    //public event EventHandler? NewGame;
     public event EventHandler? SaveGame;
     public event EventHandler? LoadGame;
     public event EventHandler<string>? GameOver;
@@ -91,7 +91,7 @@ public class MainViewModel : ViewModelBase
 
             vm.RequestStartGame += (s, e) =>
             {
-                NewGameRequested((int)e!);
+                NewGameRequested(e);
                 CurrentOverlay = null;
                 OnPropertyChanged(nameof(IsNewGameOpen));
             };

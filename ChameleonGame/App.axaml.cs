@@ -35,7 +35,7 @@ public partial class App : Application
             _model = new GameModel(_dataAccess);
             _mainViewModel = new MainViewModel(_model);
 
-            _mainViewModel.NewGame += ViewModel_NewGame;
+            //_mainViewModel.NewGame += ViewModel_NewGame;
             _mainViewModel.SaveGame += ViewModel_SaveGame; // Async void!
             _mainViewModel.LoadGame += ViewModel_LoadGame; // Async void!
             _mainViewModel.GameOver += ViewModel_GameOver;
@@ -57,24 +57,30 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private async void ViewModel_NewGame(object? sender, EventArgs e)
-    {
-        NewGameWindowViewModel vm = new NewGameWindowViewModel();
-        
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            var window = new NewGameView();
-            var viewModel = new NewGameWindowViewModel();
-            window.DataContext = viewModel;
+    //private void ViewModel_NewGame(object? sender, EventArgs e)
+    //{        
+    //    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    //    {
+    //        var view = new NewGameView();
+    //        var viewModel = new NewGameWindowViewModel();
+    //        view.DataContext = viewModel;
 
-            await window.ShowDialog(desktop.MainWindow!);
+    //        var originalContent = desktop.MainWindow!.Content;
 
-            if (viewModel.DialogResult && viewModel.SelectedSize != null)
-            {
-                _mainViewModel.NewGameCommand.Execute(viewModel.SelectedSize);
-            }
-        }
-    }
+    //        viewModel.RequestStartGame += (s, e) =>
+    //        {
+    //            _mainViewModel.NewGameCommand.Execute(e);
+    //            desktop.MainWindow.Content = originalContent;
+    //        };
+
+    //        viewModel.RequestCancel += (s, e) =>
+    //        {
+    //            desktop.MainWindow.Content = originalContent;
+    //        };
+
+    //        desktop.MainWindow.Content = view;
+    //    }
+    //}
 
     private async void ViewModel_SaveGame(object? sender, EventArgs e)
     {

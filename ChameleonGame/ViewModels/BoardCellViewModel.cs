@@ -65,12 +65,12 @@ namespace ChameleonGame.ViewModels
 
         private string TransformCellPath(string color)
         {
-            return $"cell_{color}.png";
+            return $"cell_{color.ToLower()}.png";
         }
 
         private string? TransformPiecePath(string? color)
         {
-            return color != null ? $"chameleon_{color}.png" : null;
+            return color != null ? $"chameleon_{color.ToLower()}.png" : null;
         }
     }
 

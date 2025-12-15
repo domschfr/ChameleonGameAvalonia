@@ -7,7 +7,9 @@
         mc:Ignorable="d" d:DesignWidth="627" d:DesignHeight="737"
         x:Class="ChameleonGame.Views.MainWindow"
         Icon="/Assets/chameleon_logo.ico"
-        Title="Chameleon Game">
+        Title="Chameleon Game"
+        SizeToContent="WidthAndHeight"
+        CanResize="False">
         <views:MainView />
 
 </Window>

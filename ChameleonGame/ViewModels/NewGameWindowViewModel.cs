@@ -9,7 +9,6 @@ namespace ChameleonGame.ViewModels
     public class NewGameWindowViewModel : ViewModelBase
     {
         private int? _selectedSize = null;
-        private bool _dialogResult = false;
 
         public int? SelectedSize
         {
@@ -46,7 +45,7 @@ namespace ChameleonGame.ViewModels
             set { if (value) SelectedSize = 7; }
         }
 
-        public event EventHandler<int?>? RequestStartGame;
+        public event EventHandler<int>? RequestStartGame;
         public event EventHandler? RequestCancel;
 
         public DelegateCommand ConfirmCommand { get; }
@@ -54,7 +53,7 @@ namespace ChameleonGame.ViewModels
 
         public NewGameWindowViewModel()
         {
-            ConfirmCommand = new DelegateCommand(_ => RequestStartGame?.Invoke(this, SelectedSize!), _ => SelectedSize == 3 || SelectedSize == 5 || SelectedSize == 7);
+            ConfirmCommand = new DelegateCommand(_ => RequestStartGame?.Invoke(this, SelectedSize!.Value), _ => SelectedSize == 3 || SelectedSize == 5 || SelectedSize == 7);
             CancelCommand = new DelegateCommand(_ => RequestCancel?.Invoke(this, EventArgs.Empty));
         }
     }
